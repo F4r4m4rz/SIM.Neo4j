@@ -83,6 +83,9 @@
     <Compile Include="Internal\Mediator.cs" />
     <Compile Include="Internal\ChangeTracker.cs" />
     <Compile Include="Neo4jConnection.cs" />
+    <Compile Include="SimGraph.cs" />
+    <Compile Include="Internal\ChangeState.cs" />
+    <Compile Include="SimPropertyDictionary.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -90,6 +93,7 @@
   <ItemGroup>
     <Folder Include="Abstractions\" />
     <Folder Include="Internal\" />
+    <Folder Include="Cypher\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
