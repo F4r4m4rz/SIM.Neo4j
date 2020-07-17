@@ -1,7 +1,8 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIM.Neo4j", "SIM.Neo4j\SIM.Neo4j.csproj", "{73FAAA65-6DEB-4916-99C5-66BC51358AD9}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIM.Neo4j", "SIM.Neo4j\SIM.Neo4j.csproj", "{09ABD0E7-1F54-4B5F-970B-A5418BCDDA6E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,9 +10,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{73FAAA65-6DEB-4916-99C5-66BC51358AD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{73FAAA65-6DEB-4916-99C5-66BC51358AD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{73FAAA65-6DEB-4916-99C5-66BC51358AD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{73FAAA65-6DEB-4916-99C5-66BC51358AD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09ABD0E7-1F54-4B5F-970B-A5418BCDDA6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09ABD0E7-1F54-4B5F-970B-A5418BCDDA6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09ABD0E7-1F54-4B5F-970B-A5418BCDDA6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09ABD0E7-1F54-4B5F-970B-A5418BCDDA6E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B26F3D41-31A0-4BB9-8F22-374E87715ED8}
 	EndGlobalSection
 EndGlobal

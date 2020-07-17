@@ -70,17 +70,28 @@ namespace SIM.Neo4j
         {
             Values.Remove(this[key]);
             Keys.Remove(key);
-
+            return true;
         }
 
         public bool Remove(KeyValuePair<string, object> item)
         {
-            throw new NotImplementedException();
+            Values.Remove(this[item.Key]);
+            Keys.Remove(item.Key);
+            return true;
         }
 
         public bool TryGetValue(string key, out object value)
         {
-            throw new NotImplementedException();
+            value = null;
+            try
+            {
+                value = this[key];
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
