@@ -8,7 +8,7 @@ namespace SIM.Neo4j
     /// <summary>
     /// Represents a graph
     /// </summary>
-    public class SimGraph
+    public partial class SimGraph
     {
         /// <summary>
         /// List of available nodes in the graph

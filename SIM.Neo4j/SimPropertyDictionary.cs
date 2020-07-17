@@ -7,6 +7,8 @@ namespace SIM.Neo4j
 {
     public class SimPropertyDictionary : IDictionary<string, object>
     {
+        public event EventHandler<KeyValuePair<string, object>?> EntriesChanged;
+
         public object this[string key]
         {
             get
@@ -32,18 +34,21 @@ namespace SIM.Neo4j
         {
             Keys.Add(key);
             Values.Add(value);
+            RaiseEntriesChanged(new KeyValuePair<string, object>(key, value));
         }
 
         public void Add(KeyValuePair<string, object> item)
         {
             Keys.Add(item.Key);
             Values.Add(item.Value);
+            RaiseEntriesChanged(item);
         }
 
         public void Clear()
         {
             Keys.Clear();
             Values.Clear();
+            RaiseEntriesChanged(null);
         }
 
         public bool Contains(KeyValuePair<string, object> item)
@@ -68,8 +73,10 @@ namespace SIM.Neo4j
 
         public bool Remove(string key)
         {
-            Values.Remove(this[key]);
+            object value = this[key];
+            Values.Remove(value);
             Keys.Remove(key);
+            RaiseEntriesChanged(new KeyValuePair<string, object>(key, value));
             return true;
         }
 
@@ -77,6 +84,7 @@ namespace SIM.Neo4j
         {
             Values.Remove(this[item.Key]);
             Keys.Remove(item.Key);
+            RaiseEntriesChanged(item);
             return true;
         }
 
@@ -97,6 +105,11 @@ namespace SIM.Neo4j
         IEnumerator IEnumerable.GetEnumerator()
         {
             throw new NotImplementedException();
+        }
+
+        private void RaiseEntriesChanged(KeyValuePair<string, object>? keyValuePair)
+        {
+            EntriesChanged?.Invoke(this, keyValuePair);
         }
     }
 }
