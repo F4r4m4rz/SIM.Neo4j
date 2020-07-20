@@ -12,6 +12,7 @@ namespace SIM.Neo4j.Abstractions
     public abstract class SimEntity : INotifyPropertyChanged
     {
         private SimPropertyDictionary properties;
+        private ChangeState _changeState = ChangeState.NotChanged;
 
         protected SimEntity()
         {
@@ -41,8 +42,18 @@ namespace SIM.Neo4j.Abstractions
         /// <summary>
         /// Status of the change which will be tracked by changed tracker
         /// </summary>
-        internal ChangeState ChangeState { get; set; } = ChangeState.Added;
+        public ChangeState ChangeState
+        {
+            get => _changeState;
+
+            set
+            {
+                _changeState = value;
+                StateHasChanged?.Invoke(this, value);
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public event EventHandler<ChangeState> StateHasChanged;
     }
 }

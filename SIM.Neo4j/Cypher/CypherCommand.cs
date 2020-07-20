@@ -8,13 +8,36 @@ using System.Threading.Tasks;
 
 namespace SIM.Neo4j.Cypher
 {
-    public class CypherCommand
+    public class CypherCommand : CypherComponent
     {
-        private readonly Delegate query;
+        private ICollection<string> _occupiedIds;
+        private Queue<CypherKeyword> _keywords;
 
-        public CypherCommand(Func<SimEntity, SimGraph> query)
+        internal CypherCommand()
         {
-            this.query = query;
+            _keywords = new Queue<CypherKeyword>();
         }
+
+        public MatchCommand Match()
+        {
+            return new MatchCommand(this);
+        }
+
+        public ReturnCommand Return(params string[] ids)
+        {
+            return new ReturnCommand(this, ids);
+        }
+
+        internal override string AsPainCypher()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal override void Validate()
+        {
+            throw new NotImplementedException();
+        }
+
+        internal Queue<CypherKeyword> Keywords { get => _keywords; }
     }
 }

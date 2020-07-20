@@ -5,7 +5,7 @@ namespace SIM.Neo4j.Internal
 {
     internal static class Mediator
     {
-        private static Neo4jConnection ne4jConnection;
+        private static Neo4jClient ne4jConnection;
 
         internal static bool IsConnected()
         {
@@ -18,7 +18,7 @@ namespace SIM.Neo4j.Internal
             ChangeTracker = null;
         }
 
-        internal static Neo4jConnection Ne4jConnection
+        internal static Neo4jClient Ne4jConnection
         {
             get
             {

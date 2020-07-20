@@ -1,7 +1,7 @@
 ﻿using System;
 namespace SIM.Neo4j.Internal
 {
-    internal enum ChangeState
+    public enum ChangeState
     {
         Added,
         Modified,
