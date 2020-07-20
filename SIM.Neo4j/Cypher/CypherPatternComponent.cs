@@ -24,6 +24,7 @@ namespace SIM.Neo4j.Cypher
             {
                 var label = $":{baseType.Name}";
                 labels = string.Format("{0} {1}", labels, label);
+                baseType = baseType.BaseType;
             }
             _return = _return.Replace("#labels#", labels);
             return _return;

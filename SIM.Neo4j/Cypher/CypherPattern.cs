@@ -116,9 +116,10 @@ namespace SIM.Neo4j.Cypher
         {
             var isValid = false;
             var baseType = label.BaseType;
-            while (baseType.BaseType != null)
+            while (baseType.BaseType != null && !isValid)
             {
                 isValid = baseType == parentType;
+                baseType = baseType.BaseType;
             }
             if (!isValid)
                 throw new ArgumentException($"Label as type {label} is not accepted.\nExpected label of type {parentType}");

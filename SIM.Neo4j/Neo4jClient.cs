@@ -2,6 +2,7 @@
 using SIM.Neo4j.Cypher;
 using SIM.Neo4j.Internal;
 using System;
+using System.Collections.Generic;
 using System.Reflection.Metadata.Ecma335;
 using System.Threading.Tasks;
 
@@ -35,12 +36,26 @@ namespace SIM.Neo4j.Connection
 
         public SimGraph ExecuteQuery(CypherCommand command)
         {
-            throw new NotImplementedException();
+            var cmdStr = command.AsPainCypher();
+            var _session = _driver.AsyncSession();
+            var _result = _session.ReadTransactionAsync(async (a) =>
+            {
+                var list = new List<object>();
+                var result = await a.RunAsync(cmdStr);
+                while (await result.FetchAsync())
+                {
+                    list.Add(result.Current);
+                }
+                return list;
+            });
+            _result.Wait();
+
+            return null;
         }
 
         public void ExecuteNonQuery(CypherCommand command)
         {
-
+            
         }
 
         private void CheckConnectivity()
