@@ -7,10 +7,16 @@ namespace SIM.Neo4j.Cypher
 {
     public class CypherKeyword : CypherComponent
     {
-        private CypherCommand _command;
-        private Queue<CypherPattern> _patterns;
+        protected CypherCommand _command;
+        protected Queue<CypherPattern> _patterns;
 
-        internal CypherKeyword(CypherCommand command)
+
+        private CypherKeyword()
+        {
+            _patterns = new Queue<CypherPattern>();
+        }
+
+        internal CypherKeyword(CypherCommand command) : this()
         {
             _command = command;
             _command.Keywords.Enqueue(this);
@@ -23,7 +29,15 @@ namespace SIM.Neo4j.Cypher
 
         internal override string AsPainCypher()
         {
-            throw new NotImplementedException();
+            var _return = _symbol;
+            var initCount = _patterns.Count;
+            while (_patterns.Count > 0)
+            {
+                var format = _patterns.Count == initCount ? "{0} {1}" : "{0},{1}";
+                var str = _patterns.Dequeue().AsPainCypher();
+                _return = string.Format(format, _return, str);
+            }
+            return _return;
         }
 
         internal override void Validate()

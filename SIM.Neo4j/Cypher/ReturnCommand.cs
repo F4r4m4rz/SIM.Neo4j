@@ -11,12 +11,13 @@ namespace SIM.Neo4j.Cypher
 
         internal ReturnCommand(CypherCommand command, params string[] ids) : base(command)
         {
+            _symbol = "RETURN";
             _ids = ids;
         }
 
         internal override string AsPainCypher()
         {
-            var _return = "RETURN ";
+            var _return = _symbol;
             for (int i = 0; i < _ids.Count; i++)
             {
                 var format = i == 0 ? "{0} {1}" : "{0},{1}";

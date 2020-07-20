@@ -4,15 +4,11 @@ using System.Text;
 
 namespace SIM.Neo4j.Cypher
 {
-    public class RelationIdentifier : CypherComponent
+    public class RelationIdentifier : CypherPatternComponent
     {
-        private string _id;
-        private Type _label;
-        private CypherPattern _pattern;
-
-        internal RelationIdentifier(CypherPattern pattern)
+        internal RelationIdentifier(CypherPattern pattern) : base(pattern)
         {
-            _pattern = pattern;
+            _symbol = "-[#id# #labels#]-";
             _pattern.Relations.Enqueue(this);
         }
 
@@ -35,11 +31,6 @@ namespace SIM.Neo4j.Cypher
         public CypherPattern All()
         {
             return _pattern;
-        }
-
-        internal override string AsPainCypher()
-        {
-            throw new NotImplementedException();
         }
 
         internal override void Validate()

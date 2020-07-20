@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using SIM.Neo4j.Abstractions;
 
 namespace SIM.Neo4j.Cypher
 {
-    public class NodeIdentifier : CypherComponent
+    public class NodeIdentifier : CypherPatternComponent
     {
-        private string _id;
-        private Type _label;
-        private CypherPattern _pattern;
-
-        internal NodeIdentifier(CypherPattern pattern)
+        internal NodeIdentifier(CypherPattern pattern) : base(pattern)
         {
-            _pattern = pattern;
+            _symbol = "(#id# #labels#)";
+            _pattern.Nodes.Enqueue(this);
         }
 
         internal NodeIdentifier(CypherPattern pattern, string id) : this(pattern, id, null)
@@ -34,11 +32,6 @@ namespace SIM.Neo4j.Cypher
         public CypherPattern All()
         {
             return _pattern;
-        }
-
-        internal override string AsPainCypher()
-        {
-            throw new NotImplementedException();
         }
 
         internal override void Validate()

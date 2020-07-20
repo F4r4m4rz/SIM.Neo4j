@@ -9,7 +9,7 @@ namespace SIM.Neo4j.Cypher
     {
         internal MatchCommand(CypherCommand command) : base(command)
         {
-
+            _symbol = "MATCH";
         }
     }
 }

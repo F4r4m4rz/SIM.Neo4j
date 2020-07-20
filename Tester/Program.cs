@@ -7,7 +7,8 @@ namespace Tester
     {
         static void Main(string[] args)
         {
-            using (Neo4jClient client = new Neo4jClient(""))
+            Console.WriteLine("Hello World");
+            using (Neo4jClient client = new Neo4jClient("bolt://localhost:7687", "neo4j", "neo4j"))
             {
                 var command = client.NewCommand();
                 command.Match().Pattern().Node("a").All()
@@ -22,6 +23,10 @@ namespace Tester
                                          .Close()
                                .Close()
                         .Return("a");
+
+                var cmd = command.AsPainCypher();
+                Console.WriteLine(cmd);
+                Console.Read();
             }
         }
     }

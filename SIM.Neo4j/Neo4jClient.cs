@@ -21,8 +21,8 @@ namespace SIM.Neo4j.Connection
             if (Mediator.Ne4jConnection != null)
                 throw new InvalidOperationException("There is an open Neo4j connection.\n Cannot establish parallel connections to Neo4j.");
 
-            //_driver = GraphDatabase.Driver(uri, AuthTokens.Basic(username, password));
-            //CheckConnectivity();
+            _driver = GraphDatabase.Driver(uri, AuthTokens.Basic(username, password));
+            CheckConnectivity();
             //Mediator.Ne4jConnection = this;
             _graph = new SimGraph(this);
             _changeTracker = new ChangeTracker();

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SIM.Neo4j.Cypher
 {
-    public class CypherCommand : CypherComponent
+    public class CypherCommand
     {
         private ICollection<string> _occupiedIds;
         private Queue<CypherKeyword> _keywords;
@@ -28,12 +28,18 @@ namespace SIM.Neo4j.Cypher
             return new ReturnCommand(this, ids);
         }
 
-        internal override string AsPainCypher()
+        public string AsPainCypher()
         {
-            throw new NotImplementedException();
+            var cypherCmd = string.Empty;
+            while (_keywords.Count>0)
+            {
+                var cmd = _keywords.Dequeue().AsPainCypher();
+                cypherCmd = cypherCmd + cmd;
+            }
+            return cypherCmd;
         }
 
-        internal override void Validate()
+        internal void Validate()
         {
             throw new NotImplementedException();
         }

@@ -12,7 +12,13 @@ namespace SIM.Neo4j.Cypher
         private Queue<RelationIdentifier> _relations;
         private CypherKeyword _keyword;
 
-        internal CypherPattern(CypherKeyword keyword)
+        private CypherPattern()
+        {
+            _nodes = new Queue<NodeIdentifier>();
+            _relations = new Queue<RelationIdentifier>();
+        }
+
+        internal CypherPattern(CypherKeyword keyword) : this()
         {
             _keyword = keyword;
             _keyword.Patterns.Enqueue(this);
@@ -120,7 +126,15 @@ namespace SIM.Neo4j.Cypher
 
         internal override string AsPainCypher()
         {
-            throw new NotImplementedException();
+            var _return = string.Empty;
+            while (_nodes.Count>0)
+            {
+                string node = _nodes.Dequeue().AsPainCypher();
+                string relation = _relations.Count != 0 ? _relations.Dequeue().AsPainCypher() : string.Empty;
+                _return = string.Format("{0}{1}{2}", _return, node, relation);
+            }
+            _return = string.Concat(_return, "\n");
+            return _return;
         }
 
         internal override void Validate()
